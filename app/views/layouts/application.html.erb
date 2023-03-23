@@ -13,12 +13,19 @@
   <body>
     <header>
     <% if user_signed_in? %>
+
     <li>
-    <%= link_to '投稿フォーム', new_book_path %>
+      <%= link_to 'Homesssss', user_path(current_user.id) %>
+    </li>
+    <li>
+      <%= link_to 'Users', users_path %>
+    </li>
+    <li>
+    <%= link_to 'Booksbooooooooks', books_path %>
     </li>
 
       <li>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+        <%= link_to "Log out", destroy_user_session_path, method: :delete %>
       </li>
     <% else %>
       <li>
