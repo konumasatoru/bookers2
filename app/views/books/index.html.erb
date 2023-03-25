@@ -1,19 +1,21 @@
   <body>
   <div>
-   <div class="container">  <!-- この行を追加 -->
-    <div class="row">      <!-- この行を追加 -->
-     <div class="col-lg-4" style="background-color: orange;">
+   <div class="container">
+    <div class="row">
+     <div class="col-lg-4" style="background-color: white;">
+     <script src="https://kit.fontawesome.com/c73d66f42c.js" crossorigin="anonymous"></script>
     <h2>User info</h2>
     <%= image_tag @user.get_profile_image(100,100) %>
-    <h3><%= @user.name %></h3>
      <table class="table table=striped">
       <tr>
         <th>name</th>
-        <th></th>
+        <th><h3><%= @user.name %></h3></th>
       </tr>
        <th>introduction</th>
      </table>
-     <%= link_to 'edit', edit_user_path(current_user.id), class: "btn btn-secondary" %>
+     <%= link_to edit_user_path(current_user.id), class: "btn btn-outline-secondary btn-block" do %>
+     <i class="fas fa-user-cog"></i>
+     <% end %>
 
 <h1>New Book</h1>
   <%= form_with model: @book do |f| %>
@@ -21,21 +23,35 @@
       <%= f.text_field :title %>
     <h4>Opinion</h4>
       <%= f.text_area :body %>
-    <%= f.submit 'Create Book' %>
-   </div>
+    <%= f.submit "Crate Book", class: "btn btn-success" %>
   <% end %>
+   </div>
 
-    <div class="col-lg-8">  <!-- この行を追加 -->
-     <h1>books</h1>
+
+
+    <div class="col-lg-8">
+     <h1>Books</h1>
+     <table class="table table-hover table-inverse">
+     <thead>
+     <tr>
+      <th></th>
+      <th>Title</th>
+      <th>Opinion</th>
+      <th colspan="3"></th>
+    </tr>
+    </thead>
+    <tbody>
       <% @books.each do |book| %>
-      <div>
-       <p>Title：<%= book.title %></p>
-       <p>Opinion：<%= book.body %></p>
-       <p>ユーザーネーム：<%= book.user.name %></p>
-      </div>
+      <tr>
+       <td><%= book.user.name %></td>
+       <td><%= book.title %></td>
+       <td><%= book.body %></td>
+      </tr>
+    <% end %>
+    </tbody>
+    </table>
     </div>
    </div>
    </div>
    </div>
-<% end %>
 </body>
