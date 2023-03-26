@@ -12,6 +12,7 @@
         <th><h3><%= @user.name %></h3></th>
       </tr>
        <th>introduction</th>
+       <th><h3><%= @user.introduction %></h3></th>
      </table>
      <%= link_to edit_user_path(current_user.id), class: "btn btn-outline-secondary btn-block" do %>
      <i class="fas fa-user-cog"></i>
