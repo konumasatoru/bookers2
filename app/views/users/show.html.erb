@@ -47,7 +47,7 @@
       <% @books.each do |book| %>
       <tr>
        <td><%= book.user.name %></td>
-       <td><%= book.title %></td>
+       <td><%= link_to @book1.title, book_path(params[:id]) %></td>
        <td><%= book.body %></td>
       </tr>
     <% end %>
