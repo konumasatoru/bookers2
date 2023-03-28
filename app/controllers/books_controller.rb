@@ -7,9 +7,14 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
     @book.user_id = current_user.id
-    @book.save
-    flash[:notice] = "successfully"
-    redirect_to books_path
+    if @book.save
+     flash[:notice] = "successfully"
+     redirect_to book_path(@book.id)
+    else
+      @books = Book.all
+      @user = current_user
+      render :index
+    end
   end
 
   def index
@@ -20,6 +25,7 @@ class BooksController < ApplicationController
 
   def show
     @book = Book.find(params[:id])
+    @newbook = Book.new
     @user = current_user
     @user1 = Book.find(params[:id])
   end
@@ -35,11 +41,15 @@ class BooksController < ApplicationController
   end
 
   def update
-    book = Book.find(params[:id])
-    book.update(book_params)
+    @book = Book.find(params[:id])
+   if @book.update(book_params)
     flash[:notice] = "successfully"
-    redirect_to book_path(book.id)
-end
+    redirect_to book_path(@book.id)
+   else
+     # @book = Book.find(params[:id])
+     render :edit
+   end
+  end
 
    # 投稿データのストロングパラメータ
   private
